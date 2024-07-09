@@ -50,12 +50,16 @@ static bool insideTriangle_mymethod(float x, float y, const Eigen::Vector4f* _v)
     Eigen::Vector3f p{x, y, 1.0f};
     // AB x AP
     int sign1 = sign(v[0], v[1], p);
+    float s1 = (v[1] - v[0]).cross(p - v[0]).z();
     // BC x BP
     int sign2 = sign(v[1], v[2], p);
+    float s2 = (v[2] - v[1]).cross(p - v[1]).z();
     // CA x CP
     int sign3 = sign(v[2], v[0], p);
+    float s3 = (v[0] - v[2]).cross(p - v[2]).z();
 
-    return (sign1 == sign2 && sign2 == sign3);
+    // return (sign1 == sign2 && sign2 == sign3);
+    return (s1 > 0 && s2 > 0 && s3 > 0) || (s1 < 0 && s2 < 0 && s3 < 0);
 }
 
 
