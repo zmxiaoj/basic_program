@@ -146,9 +146,11 @@ int main()
     // Eigen::Vector3f res_qr = matrix_33.colPivHouseholderQr().solve(vector_31);
     std::cout << "The solution using QR decomposition is:\n" << res_qr.transpose() << std::endl;
 
+    // Eigen::MatrixXf matrix_5050 = Eigen::MatrixXf::Random(5000, 5000);
     Eigen::MatrixXf matrix_5050 = Eigen::MatrixXf::Random(50, 50);
     matrix_5050 = matrix_5050 * matrix_5050.transpose();
 
+    // Eigen::VectorXf vector_501 = Eigen::VectorXf::Random(5000, 1);
     Eigen::VectorXf vector_501 = Eigen::VectorXf::Random(50, 1);
 
     double start_time = clock(), end_time;
