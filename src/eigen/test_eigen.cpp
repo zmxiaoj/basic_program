@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 #include<eigen3/Eigen/Core>
 #include<eigen3/Eigen/Eigen>
+#include<eigen3/Eigen/Dense>
 
 
 static bool insideTriangle(float x, float y, const Eigen::Vector4f* _v)
@@ -65,6 +66,8 @@ static bool insideTriangle_mymethod(float x, float y, const Eigen::Vector4f* _v)
 
 int main()
 {
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::srand(seed); // 设置种子
     // std::cout << "2D Vector Operations\n";
     // Eigen::Vector2f v1{1.0f, 0.0f},
     //                 v2{0.0f, 1.0f};
@@ -108,6 +111,69 @@ int main()
     std::cout << "Point p " << p.transpose() << " is " 
               << "method1: " << (insideTriangle(p.x(), p.y(), v) ? "inside " : "outside ") 
               << "method2: " << (insideTriangle_mymethod(p.x(), p.y(), v) ? "inside " : "outside ") << std::endl;
+
+    std::cout << "---------------- " << std::endl;
+    std::cout << "Test eigensolver " << std::endl;
+
+    Eigen::Matrix3f A_eigensolver;
+    A_eigensolver << 3, 0, 0,
+                     0, 3, 0,
+                     0, 0, 3;
+    A_eigensolver = A_eigensolver * A_eigensolver.transpose();
+    std::cout << "Matrix_eigensolver:\n" << A_eigensolver << std::endl;
+    Eigen::SelfAdjointEigenSolver<Eigen::Matrix3f> eigensolver(A_eigensolver);
+    if (eigensolver.info() != Eigen::Success) 
+        abort();
+    auto eigenvalues = eigensolver.eigenvalues();
+    auto eigenvectors = eigensolver.eigenvectors();
+    std::cout << "Eigenvalues: " << eigenvalues.transpose() << std::endl;
+    std::cout << "Eigenvectors: \n" << eigenvectors << std::endl;
+
+    std::cout << "---------------- " << std::endl;
+    std::cout << "Test solver matrix" << std::endl;
+
+    Eigen::Matrix3f matrix_33 = Eigen::Matrix3f::Random();
+    matrix_33 = matrix_33 * matrix_33.transpose();
+    Eigen::Vector3f vector_31 = Eigen::Vector3f::Random();
+    std::cout << "matrix_33:\n" << matrix_33 << std::endl;
+    std::cout << "vector_31:\n" << vector_31.transpose() << std::endl;
+
+    Eigen::Vector3f res_inv = matrix_33.inverse() * vector_31;
+    std::cout << "The solution using the inverse is:\n" << res_inv.transpose() << std::endl;
+
+    Eigen::Vector3f res_qr = matrix_33.householderQr().solve(vector_31);
+    // Eigen::Vector3f res_qr = matrix_33.fullPivHouseholderQr().solve(vector_31);
+    // Eigen::Vector3f res_qr = matrix_33.colPivHouseholderQr().solve(vector_31);
+    std::cout << "The solution using QR decomposition is:\n" << res_qr.transpose() << std::endl;
+
+    Eigen::MatrixXf matrix_5050 = Eigen::MatrixXf::Random(50, 50);
+    matrix_5050 = matrix_5050 * matrix_5050.transpose();
+
+    Eigen::VectorXf vector_501 = Eigen::VectorXf::Random(50, 1);
+
+    double start_time = clock(), end_time;
+    Eigen::VectorXf res_inv_50 = matrix_5050.inverse() * vector_501;
+    end_time = clock();
+    std::cout << "Time using inverse: " << 1000 * (end_time - start_time) / CLOCKS_PER_SEC << "ms" << std::endl;
+    float relative_error_inv = (matrix_5050 * res_inv_50 - vector_501).norm() / vector_501.norm();
+    std::cout << "The relative error of the solution using the inverse is: " << relative_error_inv << std::endl;
+    // std::cout << "The solution using the inverse is:\n" << res_inv_50.transpose() << std::endl;
+
+    start_time = clock();
+    Eigen::VectorXf res_qr_50 = matrix_5050.householderQr().solve(vector_501);
+    end_time = clock();
+    std::cout << "Time using QR decomposition: " << 1000 * (end_time - start_time) / CLOCKS_PER_SEC << "ms" << std::endl;
+    float relative_error_qr = (matrix_5050 * res_qr_50 - vector_501).norm() / vector_501.norm();
+    std::cout << "The relative error of the solution using QR decomposition is: " << relative_error_qr << std::endl;
+    // std::cout << "The solution using QR decomposition is:\n" << res_qr_50.transpose() << std::endl;
+
+    start_time = clock();
+    Eigen::VectorXf res_ldlt_50 = matrix_5050.ldlt().solve(vector_501);
+    end_time = clock();
+    std::cout << "Time using LDLT decomposition: " << 1000 * (end_time - start_time) / CLOCKS_PER_SEC << "ms" << std::endl;
+    float relative_error_ldlt = (matrix_5050 * res_ldlt_50 - vector_501).norm() / vector_501.norm();
+    std::cout << "The relative error of the solution using LDLT decomposition is: " << relative_error_ldlt << std::endl;
+    // std::cout << "The solution using LDLT decomposition is:\n" << res_ldlt_50.transpose() << std::endl;
 
     return 0;
 }
