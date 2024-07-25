@@ -39,10 +39,17 @@ target_link_libraries(test_eigen
     ${EIGEN3_LIBS}
 )
 
-add_executable(GN
+add_executable(GN_naive
     src/eigen/GN.cpp
 )
-target_link_libraries(GN
+target_link_libraries(GN_naive
+    ${EIGEN3_LIBS}
+)
+
+add_executable(BA_naive
+    src/eigen/BA.cpp
+)
+target_link_libraries(BA_naive
     ${EIGEN3_LIBS}
 )
 
