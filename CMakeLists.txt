@@ -39,6 +39,13 @@ target_link_libraries(test_eigen
     ${EIGEN3_LIBS}
 )
 
+add_executable(GN
+    src/eigen/GN.cpp
+)
+target_link_libraries(GN
+    ${EIGEN3_LIBS}
+)
+
 # feature_extraction 可执行文件
 add_executable(feature_extraction
     src/opencv/feature_extractor.cpp
