@@ -8,12 +8,14 @@ SET(CMAKE_BUILD_TYPE Release)
 find_package(OpenCV 4 REQUIRED)
 find_package(PCL REQUIRED COMPONENTS common)
 find_package(Eigen3 REQUIRED)
+find_package(Ceres REQUIRED)
 
 include_directories(
     ${PROJECT_SOURCE_DIR}
     ${EIGEN3_INCLUDE_DIR}
     ${OpenCV_INCLUDE_DIRS}
     ${PCL_INCLUDE_DIRS}
+    ${CERES_INCLUDE_DIRS}
 )
 
 # 创建一个库（如果有共享代码的话，否则可以省略）
@@ -51,6 +53,14 @@ add_executable(BA_naive
 )
 target_link_libraries(BA_naive
     ${EIGEN3_LIBS}
+)
+
+# ceres_solver
+add_executable(ceres_test
+    src/ceres/ceres_test.cpp
+)
+target_link_libraries(ceres_test
+    ${CERES_LIBRARIES}
 )
 
 # feature_extraction 可执行文件

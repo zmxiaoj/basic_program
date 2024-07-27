@@ -46,10 +46,8 @@ void bundleAdjustment(std::vector<Camera>& cameras,
         Eigen::Matrix<double, 2, 3> J_point;
 
         // todo: calculate Jacobian Matrix
-        J_cam << 1, 0, -projected(0),
-                 0, 1, -projected(1);
-        J_point = K * Eigen::Matrix<double, 3, 2>::Identity();
-        
+        J_cam.setZero();
+        J_point.setZero();
 
         H.block<6, 6>(6 * obs.camera_idx, 6 * obs.camera_idx) += J_cam.transpose() * J_cam;
         H.block<6, 3>(6 * obs.camera_idx, 6 * cameras.size() + 3 * obs.point3d_idx) += J_cam.transpose() * J_point;
