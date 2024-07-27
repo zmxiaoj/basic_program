@@ -26,10 +26,13 @@ int main()
     // construct NLS problem
     std::cout << "Start to construct NLS problem" << std::endl;
     ceres::Problem problem;
+    // ceres::LossFunction* loss_function = new ceres::HuberLoss(1.0);
+    // ceres::LossFunction* loss_function = new ceres::CauchyLoss(1.0);
     for (int i = 0; i < data.size(); i++) {
         ceres::CostFunction* cost_function = new ceres::AutoDiffCostFunction<Cureve_Fitting_Cost, 1, 3>(
             new Cureve_Fitting_Cost(data[i].first, data[i].second)
         );
+        // problem.AddResidualBlock(cost_function, loss_function, abc);
         problem.AddResidualBlock(cost_function, nullptr, abc);
     }
 
