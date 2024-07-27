@@ -2,12 +2,11 @@
 
 ### Finished
 - Eigen basic func
-- GN method to solve NLS(naive)
+- GN method to solve NLS(naive&ceres&g2o)
 - BA(naive)
 
 ### Todo
 - solve BA(ceres&g2o&GTSAM)
-- GN/LM method to solve NLS(ceres&g2o)
 - basic stl
 - RANSAC(naive&pcl)
 - Triangulation
