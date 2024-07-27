@@ -7,7 +7,7 @@
 
 ### Todo
 - solve BA(ceres&g2o&GTSAM)
-- GN method to solve NLS(ceres&g2o)
+- GN/LM method to solve NLS(ceres&g2o)
 - basic stl
 - RANSAC(naive&pcl)
 - Triangulation

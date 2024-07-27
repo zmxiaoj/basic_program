@@ -45,6 +45,7 @@ void bundleAdjustment(std::vector<Camera>& cameras,
         Eigen::Matrix<double, 2, 6> J_cam;
         Eigen::Matrix<double, 2, 3> J_point;
 
+        // todo: calculate Jacobian Matrix
         J_cam << 1, 0, -projected(0),
                  0, 1, -projected(1);
         J_point = K * Eigen::Matrix<double, 3, 2>::Identity();
