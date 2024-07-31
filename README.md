@@ -7,7 +7,7 @@
 
 ### Todo
 - solve BA(ceres&g2o&GTSAM)
-- basic stl
+- basic stl(ptr vector unordered_map)
 - RANSAC(naive&pcl)
 - Triangulation
 - X points methods for F/E/H
@@ -16,3 +16,6 @@
 - feature extractor&matcher
 - KD tree build
 - Matrix multiply(naive)
+- line fitting(naive&Hough)
+- Construct OctTree to normalize point cloud
+- Kalman Filter

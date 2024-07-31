@@ -6,7 +6,7 @@ struct Cureve_Fitting_Cost
     Cureve_Fitting_Cost(double x, double y) : _x(x), _y(y) {}
 
     template<typename T>
-    bool operator() (const T* const abc, T* residual) const {
+    bool operator() (const T* abc, T* residual) const {
         residual[0] = T(_y) - ceres::exp(abc[0] * T(_x) * T(_x) + abc[1] * T(_x) + abc[2]);
         return true;
     }
@@ -19,7 +19,7 @@ int main()
 {
     // y = exp(a * x^2 + b * x + c) + w
     // x-y 
-    std::vector<std::pair<double, double>> data = {{0, 1}, {1, 2}, {2, 3}};
+    std::vector<std::pair<double, double>> data = {{0.0, 1.0}, {1.0, 2.0}, {2.0, 3.0}};
     // initial parameters a b c
     double abc[3] = {1.0, 1.0, 1.0};
 
