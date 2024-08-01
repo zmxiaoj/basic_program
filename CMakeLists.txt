@@ -38,10 +38,18 @@ link_directories(
 )
 
 # test eigen 可执行文件
-add_executable(test_eigen
+add_executable(eigen_test
     src/eigen/test_eigen.cpp
 )
-target_link_libraries(test_eigen
+target_link_libraries(eigen_test
+    ${EIGEN3_LIBS}
+)
+
+# test eigen 可执行文件
+add_executable(class_test
+    src/basic_stl/class.cpp
+)
+target_link_libraries(class_test
     ${EIGEN3_LIBS}
 )
 
