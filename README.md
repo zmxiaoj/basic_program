@@ -5,12 +5,12 @@
 - GN method to solve NLS(naive&ceres&g2o)
 - BA(naive)
 - basic(class)
-- 
+- basic stl(vector_naive)
 
 ### Todo
 - sort algorithm
 - solve BA(ceres&g2o&GTSAM)
-- basic stl(ptr vector unordered_map)
+- basic stl(ptr unordered_map)
 - RANSAC(naive)
 - Triangulation
 - X points methods for F/E/H
