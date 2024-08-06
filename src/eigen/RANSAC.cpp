@@ -28,7 +28,7 @@ float pointToPlaneDistance(const Point3D& p, float a, float b, float c, float d)
 }
 
 // RANSAC algorithm for plane fitting
-void ransacPlane(const std::vector<Point3D>& points, float& best_a, float& best_b, float& best_c, float& best_d, int maxIterations, float distanceThreshold) {
+void ransacPlane(const std::vector<Point3D>& points, float& best_a, float& best_b, float& best_c, float& best_d, float ratioSuccess, int maxIterations, float distanceThreshold) {
     int bestInliersCount = 0;
     
     std::srand(std::time(0)); // Seed for random number generator
@@ -68,6 +68,13 @@ void ransacPlane(const std::vector<Point3D>& points, float& best_a, float& best_
             best_c = c;
             best_d = d;
         }
+
+        // update iteration num
+        float inliersRatio = static_cast<float>(inliersCount) / points.size();
+        int iterations = std::ceil(std::log(1 - ratioSuccess) / std::log(1 - std::pow(inliersRatio, 3)));
+        if (i >= iterations) {
+            break;
+        }
     }
 }
 
@@ -81,8 +88,9 @@ int main() {
     float best_a, best_b, best_c, best_d;
     int maxIterations = 1000;
     float distanceThreshold = 0.1;
+    float ratioSuccess = 0.95;
 
-    ransacPlane(points, best_a, best_b, best_c, best_d, maxIterations, distanceThreshold);
+    ransacPlane(points, best_a, best_b, best_c, best_d, ratioSuccess, maxIterations, distanceThreshold);
 
     std::cout << "Best plane parameters: "
               << "a = " << best_a << ", "

@@ -6,9 +6,9 @@
 - BA(naive)
 - basic(class)
 - basic stl(vector_naive)
+- sort algorithm(mergeSort&quickSort)
 
 ### Todo
-- sort algorithm
 - solve BA(ceres&g2o&GTSAM)
 - basic stl(ptr unordered_map)
 - RANSAC(naive)
