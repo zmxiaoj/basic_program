@@ -116,8 +116,8 @@ int main()
     std::cout << "Test eigensolver " << std::endl;
 
     Eigen::Matrix3f A_eigensolver;
-    A_eigensolver << 3, 0, 0,
-                     0, 3, 0,
+    A_eigensolver << 1, 0, 0,
+                     0, 2, 0,
                      0, 0, 3;
     A_eigensolver = A_eigensolver * A_eigensolver.transpose();
     std::cout << "Matrix_eigensolver:\n" << A_eigensolver << std::endl;

@@ -37,61 +37,84 @@ link_directories(
     ${PCL_LIBRARY_DIRS}
 )
 
-# test eigen 可执行文件
-add_executable(eigen_test
-    src/eigen/test_eigen.cpp
+# basic class 可执行文件
+add_executable(ComputeGeometry
+    src/eigen/ComputeGeometry.cpp
 )
-target_link_libraries(eigen_test
+target_link_libraries(ComputeGeometry
     ${EIGEN3_LIBS}
 )
 
-# test eigen 可执行文件
-add_executable(class_test
-    src/basic_stl/class.cpp
-)
-target_link_libraries(class_test
-    ${EIGEN3_LIBS}
-)
+# # basic test
+# add_executable(test_sort
+#     src/basic_stl/sort.cpp
+# )
 
-# GN naive to fit curve
-add_executable(GN_naive
-    src/eigen/GN.cpp
-)
-target_link_libraries(GN_naive
-    ${EIGEN3_LIBS}
-)
+# # basic class 可执行文件
+# add_executable(class_test
+#     src/basic_stl/class.cpp
+# )
+# target_link_libraries(class_test
+#     ${EIGEN3_LIBS}
+# )
 
-# BA naive
-add_executable(BA_naive
-    src/eigen/BA.cpp
-)
-target_link_libraries(BA_naive
-    ${EIGEN3_LIBS}
-)
+# # kalmanfilter 可执行文件
+# add_executable(kalmanfilter
+#     src/basic_stl/KalmanFilter.cpp
+# )
+# target_link_libraries(kalmanfilter
+#     ${EIGEN3_LIBS}
+# )
 
-# ceres_solver to fit curve
-add_executable(ceres_test
-    src/ceres/ceres_test.cpp
-)
-target_link_libraries(ceres_test
-    ${CERES_LIBRARIES}
-)
+# # test eigen 可执行文件
+# add_executable(eigen_test
+#     src/eigen/test_eigen.cpp
+# )
+# target_link_libraries(eigen_test
+#     ${EIGEN3_LIBS}
+# )
 
-# g2o to fit curve
-add_executable(g2o_test
-    src/g2o/g2o_test.cpp
-)
-target_link_libraries(g2o_test
-    g2o_core g2o_stuff
-    ${G2O_LIBRARIES}
-    ${EIGEN3_LIBS}
-)
 
-# feature_extraction 可执行文件
-add_executable(feature_extraction
-    src/opencv/feature_extractor.cpp
-)
-target_link_libraries(feature_extraction
-    ${EIGEN3_LIBS}
-    ${OpenCV_LIBS}
-)
+
+# # GN naive to fit curve
+# add_executable(GN_naive
+#     src/eigen/GN.cpp
+# )
+# target_link_libraries(GN_naive
+#     ${EIGEN3_LIBS}
+# )
+
+# # BA naive
+# add_executable(BA_naive
+#     src/eigen/BA.cpp
+# )
+# target_link_libraries(BA_naive
+#     ${EIGEN3_LIBS}
+# )
+
+# # ceres_solver to fit curve
+# add_executable(ceres_test
+#     src/ceres/ceres_test.cpp
+# )
+# target_link_libraries(ceres_test
+#     ${CERES_LIBRARIES}
+# )
+
+# # g2o to fit curve
+# add_executable(g2o_test
+#     src/g2o/g2o_test.cpp
+# )
+# target_link_libraries(g2o_test
+#     g2o_core g2o_stuff
+#     ${G2O_LIBRARIES}
+#     ${EIGEN3_LIBS}
+# )
+
+# # feature_extraction 可执行文件
+# add_executable(feature_extraction
+#     src/opencv/feature_extractor.cpp
+# )
+# target_link_libraries(feature_extraction
+#     ${EIGEN3_LIBS}
+#     ${OpenCV_LIBS}
+# )

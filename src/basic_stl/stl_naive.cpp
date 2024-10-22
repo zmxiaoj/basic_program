@@ -63,6 +63,17 @@ public:
     }
 };
 
+// string class
+template <typename T>
+class String {
+    private:
+        Vector<T> data;
+    public:
+        String() {}
+        ~String() {}
+};
+
+
 int main() {
     Vector<int> vec;
     vec.push_back(1);
@@ -73,6 +84,13 @@ int main() {
         std::cout << vec[i] << " ";
     }
     std::cout << std::endl;
+
+    // 创建并使用智能指针
+    std::shared_ptr<Vector<int>> vecPtr = std::make_shared<Vector<int>>();
+    vecPtr->push_back(1);
+    vecPtr->push_back(2);
+    vecPtr->push_back(3);
+    // 使用智能指针时，不需要手动释放内存
 
     return 0;
 }

@@ -103,8 +103,10 @@ int main()
     std::cout << "----------------" << std::endl;
     std::cout << "Destruct " << std::endl;
     Box* box = new Cube(center, size, height, 1);
+
     // malloc 分配内存不能初始化对象，返回void*后进行类型转换
     // Box* box1 = (Box*)malloc(sizeof(Cube));
+    
     float boxArea = box->area();
     std::cout << "Box area: " << boxArea << std::endl;
     delete box;
